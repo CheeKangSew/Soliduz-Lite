@@ -23,33 +23,8 @@ def reverse_geocode(point):
     location = geocode(point, exactly_one=True)
     return location.address if location else "Unknown"
 
-# Initialize API key for the geocoding service
-api_key = '6648572b8da9f925591996zui365a73'  # Replace with your actual API key
-
-# Function to reverse geocode using the geocoding service
-# def reverse_geocode(lat, lon):
-    #try:
-        #url = f"https://geocode.maps.co/reverse?lat={lat}&lon={lon}&api_key=api_key"
-        #response = requests.get(url)
-        #if response.status_code == 200:
-            #result = response.json()
-            #if 'address' in result:
-                #address_components = result['address']
-                # You can adjust the components you want to return here
-                #city = address_components.get('city', '')
-                #state = address_components.get('state', '')
-                #country = address_components.get('country', '')
-                #return f"{city}, {state}, {country}"
-            #else:
-                #return 'Unknown'
-      
-    #except Exception as e:
-        #st.error(f"Exception occurred during reverse geocoding: {e}")
-        #return 'Unknown'
-
 # Streamlit application
 st.title('Fuel Transaction Analysis')
-
 
 # Initialize an empty DataFrame
 df = pd.DataFrame()
