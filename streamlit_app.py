@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 """
 Created on Sat May 18 12:26:21 2024
-
 @author: User
 """
-
 import pandas as pd
 import geopandas as gpd
 from shapely.geometry import Point
@@ -22,7 +20,7 @@ geocode = RateLimiter(geolocator.reverse, min_delay_seconds=1)
 def reverse_geocode(point):
     location = geocode(point, exactly_one=True)
     return location.address if location else "Unknown"
-
+    
 # Streamlit application
 st.title('Fuel Transaction Analysis')
 
@@ -35,7 +33,6 @@ st.sidebar.title('User Input')
 # 1. Read a CSV file and store it into a pandas DataFrame
 uploaded_file = st.sidebar.file_uploader("Upload CSV", type=["csv"])
 if uploaded_file:
-# if file_path:
     try:
         df = pd.read_csv(uploaded_file)
         # df = pd.read_csv(file_path)
