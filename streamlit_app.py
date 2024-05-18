@@ -39,7 +39,7 @@ if uploaded_file:
         st.success('File loaded successfully')
         
         # 2. Filter the data based on a given AccountNo
-        account_no = st.text_input('Enter AccountNo to filter', 'AC00000011')
+        account_no = st.text_input('Enter AccountNo to filter')
         filtered_df = df[df['AccountNo'] == account_no]
         
         # Display the filtered data
