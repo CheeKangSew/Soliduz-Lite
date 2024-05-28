@@ -13,7 +13,7 @@ from geopy.extra.rate_limiter import RateLimiter
 import requests
 
 # Initialize Nominatim API
-geolocator = Nominatim(user_agent="geoapiExercises")
+geolocator = Nominatim(user_agent="abcd")
 geocode = RateLimiter(geolocator.reverse, min_delay_seconds=1)
 
 # Function to reverse geocode
