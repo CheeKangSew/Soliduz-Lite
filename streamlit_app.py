@@ -36,6 +36,9 @@ if uploaded_file:
     try:
         df = pd.read_csv(uploaded_file)
         # df = pd.read_csv(file_path)
+        # Convert the 'TrackingCardNo' column to string format
+        if 'TrackingCardNo' in df.columns:
+            df['TrackingCardNo'] = df['TrackingCardNo'].apply(lambda x: str(int(x)) if pd.notnull(x) else '')
         st.success('File loaded successfully')
         
         # 2. Filter the data based on a given AccountNo
