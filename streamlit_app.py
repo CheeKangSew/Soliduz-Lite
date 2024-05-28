@@ -11,6 +11,7 @@ import streamlit as st
 from geopy.geocoders import Nominatim 
 from geopy.extra.rate_limiter import RateLimiter
 import requests
+import plotly.express as px
 
 # Initialize Nominatim API
 geolocator = Nominatim(user_agent="abcd")
@@ -85,15 +86,21 @@ if uploaded_file:
         st.subheader('Transaction Locations with Geo Coordinates')
         st.write(geo_df[['TransactionEntryNo', 'TransactionDateTime', 'VehicleRegistrationNo', 'DriverFullName', 'Amount', 'Location']])
         
-        # Plot the locations on a map
+
+        # Plot the locations on a map using Plotly and Mapbox
         st.subheader('Transaction Locations Map')
-        fig, ax = plt.subplots(1, 1, figsize=(10, 6))
-        world = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
-        world.plot(ax=ax, color='lightgrey')
-        geo_df.plot(ax=ax, color='red', markersize=5, alpha=0.7)
-        plt.title('Transaction Locations')
-        plt.xlabel('Longitude')
-        plt.ylabel('Latitude')
-        st.pyplot(fig)
+        fig = px.scatter_mapbox(
+            geo_df, 
+            lat='Latitude', 
+            lon='Longitude', 
+            hover_name='Location', 
+            hover_data={'TransactionEntryNo': True, 'TransactionDateTime': True, 'VehicleRegistrationNo': True, 'DriverFullName': True, 'Amount': True},
+            color_discrete_sequence=['red'],
+            zoom=5,
+            height=600
+        )
+        fig.update_layout(mapbox_style="open-street-map")
+        fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+        st.plotly_chart(fig)
     except Exception as e:
         st.error(f"Error loading file: {e}")
